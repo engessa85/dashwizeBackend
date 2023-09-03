@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
+from django.conf import settings
+
 
 # Create your models here.
 
@@ -40,3 +42,11 @@ class UserAccount(AbstractBaseUser, PermissionsMixin):
     
     def __str__(self):
         return self.name
+
+class UserPaymentInfo(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    payed_ceo = models.BooleanField(default=False, blank=True, null=True)
+    payed_cto = models.BooleanField(default=False, blank=True, null=True)
+
+    def __str__(self):
+        return str(self.user.email)
