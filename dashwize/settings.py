@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 import os
+import datetime
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -40,7 +42,8 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "corsheaders",
     "rest_framework",
-    "accounts.apps.AccountsConfig"
+    "accounts.apps.AccountsConfig",
+    "dataentery.apps.DataenteryConfig"
 ]
 
 MIDDLEWARE = [
@@ -156,3 +159,12 @@ FILE_UPLOAD_PERMISSIONS=0o640
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 AUTH_USER_MODEL = "accounts.UserAccount"
+
+
+# Import the necessary modules
+
+# Set the JWT expiration time (e.g., 1 day)
+JWT_EXPIRATION_DELTA = datetime.timedelta(days=1)
+
+# Set the JWT refresh expiration time (e.g., 30 days)
+JWT_REFRESH_EXPIRATION_DELTA = datetime.timedelta(days=30)
