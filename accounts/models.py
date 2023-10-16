@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 from django.conf import settings
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 
 # Create your models here.
@@ -50,3 +52,8 @@ class UserPaymentInfo(models.Model):
 
     def __str__(self):
         return str(self.user.email)
+    
+@receiver(post_save, sender = settings.AUTH_USER_MODEL)
+def create_user_payment_info(sender, instance, created, **kwargs):
+    if created:
+        UserPaymentInfo.objects.create(user = instance)

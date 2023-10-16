@@ -161,10 +161,8 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 AUTH_USER_MODEL = "accounts.UserAccount"
 
 
-# Import the necessary modules
 
-# Set the JWT expiration time (e.g., 1 day)
-JWT_EXPIRATION_DELTA = datetime.timedelta(days=1)
-
-# Set the JWT refresh expiration time (e.g., 30 days)
-JWT_REFRESH_EXPIRATION_DELTA = datetime.timedelta(days=30)
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': datetime.timedelta(days=7),  # Extend the token lifetime to 7 days (or your preferred duration)
+    # Other options...
+}
